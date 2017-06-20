@@ -1,1 +1,1 @@
-No license defined from author, so AS IS. 
+No license defined from author, written in file headers so treating AS IS. 
