@@ -27,7 +27,7 @@ void BuffSerial::begin(long speed){
 #if defined(__AVR_ATmega8__)
 SIGNAL(SIG_UART_RECV)
 #else
-SIGNAL(USART_RX_vect)
+ISR(USART0_RX_vect)
 #endif
 {
 #if defined(__AVR_ATmega8__)
@@ -42,7 +42,7 @@ SIGNAL(USART_RX_vect)
 #if defined(__AVR_ATmega8__)
 SIGNAL(SIG_UART_TRANS)
 #else
-SIGNAL(USART_TX_vect)
+ISR(USART0_TX_vect)
 #endif
 {
 	if (bSerial.txEnd != bSerial.txBegin || bSerial.txFull != 0){
