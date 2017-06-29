@@ -4,8 +4,8 @@
 */
 
 // type of AVCLan hardwire driver
-//#define AVCLAN_ST485
-#define AVCLAN_PCA82C250
+#define AVCLAN_ST485
+//#define AVCLAN_PCA82C250
 //#define AVCLAN_MINI_PCA82C250
 //#define AVCLAN_RESISTOR
 
@@ -19,25 +19,25 @@
 #define DATAOUT_DDR	DDRB
 #define DATAOUT_PORT	PORTB
 #define	DATAOUT_PIN	PINB
-#define DATAOUT		3
+#define DATAOUT		6
 
 // define out control pin (pin 10 arduino) for ST485
 #define OUTEN_DDR	DDRB
 #define OUTEN_PORT	PORTB
 #define	OUTEN_PIN	PINB
-#define OUTEN		2
+#define OUTEN		5
 
 // define in pin (pin 9 arduino) for ST485
 #define DATAIN_DDR	DDRB
 #define DATAIN_PORT	PORTB
 #define	DATAIN_PIN	PINB
-#define DATAIN		1
+#define DATAIN		4
 
 // LED connected to digital pin 13
 #define LED_DDR		DDRB
 #define LED_PORT	PORTB
 #define	LED_PIN		PINB
-#define LED_OUT		5
+#define LED_OUT		7
 
 // AZFM board activate
 #define AZFM_INIT
