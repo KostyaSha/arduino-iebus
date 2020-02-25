@@ -114,9 +114,10 @@ byte AVCLanDrv::_readMessage (){
 	TCCR2B=0x02;      // prescaler 8
 	
 	if (t < AVC_START_BIT_HOLD_ON_MIN_LENGTH){
-	//if (t < 0x16){
-			SREG = oldSREG;
-			return 2;
+        bSerial.print("Error t < AVC_START_BIT_HOLD_ON_MIN_LENGTH: ");
+        bSerial.printHex8(t);
+		SREG = oldSREG;
+		return 2;
 	}
 
 	broadcast = readBits(1);
@@ -391,6 +392,11 @@ bool AVCLanDrv::handleAcknowledge (void){
 		return true;
 	}
 
+	if (broadcast == AVC_MSG_DIRECT){ 
+		// Acknowledge. 
+		send1BitWord(1);
+		return true;
+	 }
 	// Return acknowledge bit.
 	return readAcknowledge();
 } 
@@ -495,15 +501,37 @@ void AVCLanDrv::printMessage(bool incoming){
 	}
 	bSerial.printHex4(masterAddress >> 8);
 	bSerial.printHex8(masterAddress);
-	bSerial.print(" ");
+	bSerial.print("->");
 
 	bSerial.printHex4(slaveAddress >> 8);
 	bSerial.printHex8(slaveAddress);
 	bSerial.print(" ");
 	bSerial.printHex8(dataSize);
+    if (slaveAddress == 0x0FFF) {
+        bSerial.print("          ");
+    } else {
+        bSerial.print(" ");
+    }
 
-	for (byte i = 0; i < dataSize; i++){
+	for (byte i = 0; i < dataSize; i++) {
 		bSerial.printHex8(message[i]);
+        if (i == 0) {
+            if (slaveAddress == 0x01FF) { // separate logical src and dst addrs
+                bSerial.print("       ");
+            } else if (slaveAddress == 0x0FFF) {
+            
+            } else {
+                bSerial.print("->");
+            }
+        } else if (i == 1) {
+            if (slaveAddress == 0x01FF) {
+//                bSerial.print("    ");
+            } else if (slaveAddress == 0x0FFF) {
+                
+            } else {
+                bSerial.print("   ");
+            }
+        }
 	}
 	bSerial.println(); 
 

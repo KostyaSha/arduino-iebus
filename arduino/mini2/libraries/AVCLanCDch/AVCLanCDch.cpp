@@ -79,8 +79,8 @@ const AvcOutMessage CmdLanCheckOk    PROGMEM =  {AVC_MSG_DIRECT,     0x06, {0x00
 
 // AVCLan CDchanger  & timer1 init, 
 void AVCLanCDch::begin(){
-	avclan.deviceAddress = 0x0240;
-	
+//	avclan.deviceAddress = 0x0240;
+	avclan.deviceAddress = 0x0360;
 	// timer1 setup, prescaler factor - 1024
 	TCCR1A = 0;     // normal mode
 	TCCR1B = 5;     // Prescaler /1024

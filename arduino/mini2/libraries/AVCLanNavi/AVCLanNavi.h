@@ -9,7 +9,7 @@
 
 #include <avr/pgmspace.h>
 #include "AVCLanDrv.h"
-#include "WProgram.h"
+#include "Arduino.h"
 
 #define AVCLANDEVICE_NAME    " Navi"
 #define AVCLANDEVICE_VERSION "0.0.1"
